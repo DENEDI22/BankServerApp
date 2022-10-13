@@ -40,7 +40,7 @@ namespace BankServerApp.Controllers
                     }
                     else
                     {
-                        newTransaction.transactionStatus = TransactionStatus.RecieverNumberNotFound;
+                        newTransaction.transactionStatus = TransactionStatus.ReceiverNumberNotFound;
                         senderAccount.RollbackTransaction(newTransaction);
                         bank.AddTransactionToDatabase(newTransaction, TransactionTypes.Outcome);
                     }
@@ -51,7 +51,7 @@ namespace BankServerApp.Controllers
                     bank.AddTransactionToDatabase(newTransaction, TransactionTypes.Outcome);
                     return 1;
                 case 2:
-                    newTransaction.transactionStatus = TransactionStatus.RecieverNumberNotFound;
+                    newTransaction.transactionStatus = TransactionStatus.ReceiverNumberNotFound;
                     senderAccount.RollbackTransaction(newTransaction);
                     bank.AddTransactionToDatabase(newTransaction, TransactionTypes.Outcome);
                     break;
