@@ -15,32 +15,51 @@ namespace BankServerApp.Controllers
             _logger = logger;
             bank = new Bank();
         }
+
+        [HttpGet("transactions/{_accountName}")]
+        public Transaction[]? GetTransactions(string _accountName)
+        {
+            return bank.GetUsersTransactions(_accountName);
+        }
+
         [HttpGet("newtransaction/{_transactionAmount}&{_receiverName}&{_senderName}")]
         public int AddTransaction(int _transactionAmount, string _receiverName, string _senderName)
         {
             var newTransaction = new Transaction(_transactionAmount, _receiverName, _senderName);
-            switch (bank.m_registeredAccounts.Find(x => x.accountName == _senderName).ProcessTransaction(newTransaction))
+            var senderAccount = bank.m_registeredAccounts.Find(x => x.accountName == _senderName);
+            switch (senderAccount.ProcessTransaction(newTransaction))
             {
                 case 0:
-                    var senderAccount = bank.m_registeredAccounts.Find(x => x.accountName == _receiverName);
-                    if (senderAccount.ProcessTransaction(newTransaction) == 0)
+                    int transactionResult = bank.m_registeredAccounts.Find(x => x.accountName == _receiverName).ProcessTransaction(newTransaction);
+                    if (transactionResult == 0)
                     {
                         newTransaction.transactionStatus = TransactionStatus.Succeed;
-                        bank.AddTransactionToDatabase(newTransaction);
+                        bank.AddTransactionToDatabase(newTransaction, TransactionTypes.Outcome);
+                        bank.AddTransactionToDatabase(newTransaction, TransactionTypes.Income);
+                        bank.UpdateUserDatabase();
                     }
                     else
                     {
                         newTransaction.transactionStatus = TransactionStatus.RecieverNumberNotFound;
-                        ;
+                        senderAccount.RollbackTransaction(newTransaction);
+                        bank.AddTransactionToDatabase(newTransaction, TransactionTypes.Outcome);
                     }
-                    break;
+                    return transactionResult;
                 case 1:
-                    break;
-                case 2: 
+                    newTransaction.transactionStatus = TransactionStatus.NotEnoughMoney;
+                    senderAccount.RollbackTransaction(newTransaction);
+                    bank.AddTransactionToDatabase(newTransaction, TransactionTypes.Outcome);
+                    return 1;
+                case 2:
+                    newTransaction.transactionStatus = TransactionStatus.RecieverNumberNotFound;
+                    senderAccount.RollbackTransaction(newTransaction);
+                    bank.AddTransactionToDatabase(newTransaction, TransactionTypes.Outcome);
                     break;
             }
+
+            return 2;
         }
-        
+
         [HttpGet]
         public IEnumerable<Account> Get()
         {
@@ -73,6 +92,7 @@ namespace BankServerApp.Controllers
                     return account;
                 }
             }
+
             return null;
         }
     }

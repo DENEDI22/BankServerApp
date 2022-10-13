@@ -4,11 +4,11 @@ namespace BankServerApp;
 [Serializable]
 public struct Transaction
 {
-    public long transactionID;
-    public int transactionAmount;
-    public TransactionStatus transactionStatus;
-    public string recieverAccountName, senderAccountName;
-    public DateTime dateOfTransaction;
+    [JsonInclude] public long transactionID;
+    [JsonInclude] public int transactionAmount;
+    [JsonInclude] public TransactionStatus transactionStatus;
+    [JsonInclude] public string recieverAccountName, senderAccountName;
+    [JsonInclude] public DateTime dateOfTransaction;
 
     [JsonConstructor]
     public Transaction(int TransactionAmount, TransactionStatus TransactionStatus, long TransactionID,

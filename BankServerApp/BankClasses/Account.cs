@@ -30,12 +30,12 @@ public class Account
 
     public void RollbackTransaction(Transaction _transaction)
     {
-        if (allTransactions.Contains())
+        if (allTransactions.Remove(_transaction))
         {
-            
+            balance += _transaction.transactionAmount;
         }
     }
-    
+
     public bool TryLogIn(string _securityKey, ulong _deviceID)
     {
         if (loggedInDeviceIDs.Contains(_deviceID)) return true;
