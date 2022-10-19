@@ -8,8 +8,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="115d8228-f556-4a4e-9538-357da487cff5" name="Changes" comment="Transactions added">
+    <list default="true" id="115d8228-f556-4a4e-9538-357da487cff5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BankServerApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BankServerApp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/bin/Debug/net6.0/BankServerApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/bin/Debug/net6.0/BankServerApp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/bin/Debug/net6.0/BankServerApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/bin/Debug/net6.0/BankServerApp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/ref/BankServerApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/ref/BankServerApp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/refint/BankServerApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/refint/BankServerApp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/staticwebassets.pack.sentinel" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +31,6 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c6ad457575d35dcbff26c9a5e3fb1d92f1d3c55f25ef6ebf475367b5d8/List.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f3b9684f72bc2cc435eb694f7cc86eca8c240d2d1cefa1e8697a61f1f2f27f/SafeFileHandle.Windows.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f4708639776589f5ac2739f6fcbfc67343b1f9dac51cc1dbfdb003eef77cc1c/Monitor.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/dened/RiderProjects/BankServerApp/BankServerApp/BankClasses/Account.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -103,7 +109,14 @@
       <workItem from="1665257476642" duration="12238000" />
       <workItem from="1665511453944" duration="6688000" />
       <workItem from="1665618146754" duration="15247000" />
-      <workItem from="1665689260442" duration="4181000" />
+      <workItem from="1665689260442" duration="4264000" />
+      <workItem from="1665749300171" duration="3551000" />
+      <workItem from="1665758552681" duration="2705000" />
+      <workItem from="1665762419703" duration="290000" />
+      <workItem from="1665763751791" duration="3524000" />
+      <workItem from="1665775491611" duration="801000" />
+      <workItem from="1665781867824" duration="1835000" />
+      <workItem from="1666090661349" duration="1304000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1665673480747</created>
@@ -119,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665693264934</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Typo fixed in TransactionStatus.cs">
+      <created>1665693527024</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1665693527024</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,6 +162,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Init" />
     <MESSAGE value="Transactions added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Transactions added" />
+    <MESSAGE value="Typo fixed in TransactionStatus.cs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Typo fixed in TransactionStatus.cs" />
   </component>
 </project>
