@@ -48,7 +48,7 @@ public class Account
         return false;
     }
 
-    public Transaction[] Transactions(ulong _deviceID)
+    public Transaction[] Transactions(ulong _deviceID)  
     {
         if (loggedInDeviceIDs.Contains(_deviceID))
         {

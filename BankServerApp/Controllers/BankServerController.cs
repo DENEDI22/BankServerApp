@@ -30,7 +30,8 @@ namespace BankServerApp.Controllers
             switch (senderAccount.ProcessTransaction(newTransaction))
             {
                 case 0:
-                    int transactionResult = bank.m_registeredAccounts.Find(x => x.accountName == _receiverName).ProcessTransaction(newTransaction);
+                    int transactionResult = bank.m_registeredAccounts.Find(x => x.accountName == _receiverName)
+                        .ProcessTransaction(newTransaction);
                     if (transactionResult == 0)
                     {
                         newTransaction.transactionStatus = TransactionStatus.Succeed;
@@ -56,7 +57,6 @@ namespace BankServerApp.Controllers
                     bank.AddTransactionToDatabase(newTransaction, TransactionTypes.Outcome);
                     break;
             }
-
             return 2;
         }
 

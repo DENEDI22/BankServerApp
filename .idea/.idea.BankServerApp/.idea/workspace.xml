@@ -10,12 +10,13 @@
   <component name="ChangeListManager">
     <list default="true" id="115d8228-f556-4a4e-9538-357da487cff5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BankServerApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BankServerApp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/BankClasses/Account.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/Account.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/BankClasses/Bank.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/Bank.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/Controllers/BankServerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/Controllers/BankServerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BankServerApp/bin/Debug/net6.0/BankServerApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/bin/Debug/net6.0/BankServerApp.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BankServerApp/bin/Debug/net6.0/BankServerApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/bin/Debug/net6.0/BankServerApp.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/ref/BankServerApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/ref/BankServerApp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/refint/BankServerApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/refint/BankServerApp.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BankServerApp/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/staticwebassets.pack.sentinel" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,21 +45,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "full.screen.before.presentation.mode": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "HotReloadSettingsPage",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.BankServerApp">
     <configuration name="BankServerApp" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/BankServerApp/BankServerApp.csproj" />
@@ -67,6 +69,7 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
+      <browser name="37cae5b9-e8b2-4949-9172-aafa37fbc09c" />
       <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
       <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
       <option name="SEND_DEBUG_REQUEST" value="1" />
@@ -90,6 +93,10 @@
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Launch Settings Profile.BankServerApp" />
+      <item itemvalue=".NET Launch Settings Profile.BankServerApp: IIS Express" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -117,6 +124,12 @@
       <workItem from="1665775491611" duration="801000" />
       <workItem from="1665781867824" duration="1835000" />
       <workItem from="1666090661349" duration="1304000" />
+      <workItem from="1666158705732" duration="816000" />
+      <workItem from="1666160991845" duration="2779000" />
+      <workItem from="1666208464643" duration="811000" />
+      <workItem from="1666211152474" duration="379000" />
+      <workItem from="1666212618277" duration="606000" />
+      <workItem from="1666378393950" duration="6631000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1665673480747</created>
@@ -139,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665693527024</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Latest builds">
+      <created>1666158741609</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666158741609</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,6 +183,7 @@
     <MESSAGE value="Init" />
     <MESSAGE value="Transactions added" />
     <MESSAGE value="Typo fixed in TransactionStatus.cs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Typo fixed in TransactionStatus.cs" />
+    <MESSAGE value="Latest builds" />
+    <option name="LAST_COMMIT_MESSAGE" value="Latest builds" />
   </component>
 </project>

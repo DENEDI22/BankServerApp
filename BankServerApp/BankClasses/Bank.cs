@@ -67,7 +67,7 @@ public class Bank
             }
         }
 
-        return null;
+        return Array.Empty<Transaction>();
     }
 
     public Bank()
