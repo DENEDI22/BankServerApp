@@ -5,9 +5,12 @@ namespace BankServerApp;
 public class Bank
 {
     public List<Account> m_registeredAccounts { get; set; }
-    public List<Transaction> m_processingTransactionsSet { get; set; }
 
-    private const string SAVEPATH = "/registeredAccounts.json";
+    public List<Transaction> m_processingTransactionsSet { get; set; }
+    public List<Card> m_Cards { get; set; }
+
+    private const string ACCOUNTS_SAVEPATH = "/registeredAccounts.json";
+    private const string CARDS_SAVEPATH = "/allCards.json";
     private const string TRANSACTIONSSAVEFOLDER = "/Transactions";
 
     public void AddTransactionToDatabase(Transaction _transaction, TransactionTypes _transactionType)
@@ -49,8 +52,20 @@ public class Bank
     public void UpdateUserDatabase()
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder) + SAVEPATH;
+        var path = Environment.GetFolderPath(folder) + ACCOUNTS_SAVEPATH;
         File.WriteAllTextAsync(path, JsonSerializer.Serialize(m_registeredAccounts));
+    }
+
+    public Card GetCardOfNumber(int _cardNumber)
+    {
+        return m_Cards.Find(x => x.cardNumber == _cardNumber);
+    }
+
+    public void UpdateCardsDatabase()
+    {
+        var folder = Environment.SpecialFolder.LocalApplicationData;
+        var path = Environment.GetFolderPath(folder) + CARDS_SAVEPATH;
+        File.WriteAllTextAsync(path, JsonSerializer.Serialize(m_Cards));
     }
 
     public Transaction[]? GetUsersTransactions(string _accountName)
@@ -70,11 +85,25 @@ public class Bank
         return Array.Empty<Transaction>();
     }
 
+    private void GenerateCards()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 1000; j < 10000; j++)
+            {
+                m_Cards.Add(new Card(Int32.Parse($"2{i}33{j}"), (Currencies)i));
+            }
+        }
+    }
+
     public Bank()
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder) + SAVEPATH;
+        string path;
 
+        #region AccountsLoad
+
+        path = Environment.GetFolderPath(folder) + ACCOUNTS_SAVEPATH;
         if (File.Exists(path))
         {
             using (StreamReader reader = new StreamReader(path))
@@ -89,5 +118,27 @@ public class Bank
             using FileStream stream = new FileStream(path, FileMode.Create);
             stream.Dispose();
         }
+
+        #endregion
+
+        #region CardsLoad
+
+        path = Environment.GetFolderPath(folder) + CARDS_SAVEPATH;
+        if (File.Exists(path))
+        {
+            using (StreamReader reader = new StreamReader(path))
+            {
+                m_Cards = (JsonSerializer.Deserialize<Card[]>(reader.ReadToEnd()) ??
+                           throw new InvalidOperationException()).ToList();
+            }
+        }
+        else
+        {
+            m_Cards = new List<Card>();
+            using FileStream stream = new FileStream(path, FileMode.Create);
+            stream.Dispose();
+        }
+
+        #endregion
     }
 }

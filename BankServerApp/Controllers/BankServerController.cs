@@ -21,11 +21,12 @@ namespace BankServerApp.Controllers
         {
             return bank.GetUsersTransactions(_accountName);
         }
-
-        [HttpGet("newtransaction/{_transactionAmount}&{_receiverName}&{_senderName}")]
-        public int AddTransaction(int _transactionAmount, string _receiverName, string _senderName)
+        [HttpGet("newtransaction/{_transactionAmount}&{_receiverName}&{_senderName}&{_senderCardNumber}&{_senderCardCVV}&{_receiverCardNumber}")]
+        public int AddTransaction(int _transactionAmount, string _receiverName, string _senderName,
+            int _senderCardNumber,int _senderCardCVV, int _receiverCardNumber)
         {
-            var newTransaction = new Transaction(_transactionAmount, _receiverName, _senderName);
+            var newTransaction = new Transaction(_transactionAmount, _receiverName, _senderName, _receiverCardNumber,
+                _senderCardNumber);
             var senderAccount = bank.m_registeredAccounts.Find(x => x.accountName == _senderName);
             switch (senderAccount.ProcessTransaction(newTransaction))
             {
@@ -45,6 +46,7 @@ namespace BankServerApp.Controllers
                         senderAccount.RollbackTransaction(newTransaction);
                         bank.AddTransactionToDatabase(newTransaction, TransactionTypes.Outcome);
                     }
+
                     return transactionResult;
                 case 1:
                     newTransaction.transactionStatus = TransactionStatus.NotEnoughMoney;
@@ -57,6 +59,7 @@ namespace BankServerApp.Controllers
                     bank.AddTransactionToDatabase(newTransaction, TransactionTypes.Outcome);
                     break;
             }
+
             return 2;
         }
 
