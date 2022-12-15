@@ -9,20 +9,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="115d8228-f556-4a4e-9538-357da487cff5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/Card.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/Currencies.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/Deposits/Deposit.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/CentralAccountFunctions/CentralAccount.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/CentralAccountFunctions/Credit.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/CentralAccountFunctions/Deposit.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/CentralAccountFunctions/DepositTables.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BankServerApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BankServerApp/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BankServerApp/BankClasses/Account.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/Account.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BankServerApp/BankClasses/Bank.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/Bank.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/BankClasses/Card.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/Card.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/BankClasses/ExchangeTables.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/ExchangeTables.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BankServerApp/BankClasses/Transaction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/BankClasses/Transaction.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BankServerApp/Controllers/BankServerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/Controllers/BankServerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BankServerApp/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BankServerApp/bin/Debug/net6.0/BankServerApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/bin/Debug/net6.0/BankServerApp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BankServerApp/bin/Debug/net6.0/BankServerApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/bin/Debug/net6.0/BankServerApp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/staticwebassets.pack.sentinel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/BankServerApp.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/BankServerApp.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/BankServerApp.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/BankServerApp.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/Debug/net6.0/BankServerApp.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BankServerApp/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/BankServerApp/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,24 +40,18 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/071239f82cc346a9b8bac66be055fbfc19480/e8/00bd1907/WebApplication.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/52cd844476ec4091838909409447be01a23688/4d/2c00ece2/Environment.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5cf3454feeba467d9451d43c012c78ca1cb890/83/a2ab3cf3/ControllerEndpointRouteBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/10b4c96ced35e7ef3e1bbb59a3a85e3ce82c2ebb6dd8ae493f955f034854eed/Byte.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1abb2696c3e0194fd5bb62254c37a28878e46192b53fe8ad2df3f329e6f77ee/MvcServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b64452b1c2944ed3799d830ba18a2df1a3b8e39d12ef88245b77bcb0421714/ThrowHelper.Serialization.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bceb877fbde5705c8d35845865f1f66ea4374c74ad1c31ba3a1299a2b62/JsonConstructorAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c6ad457575d35dcbff26c9a5e3fb1d92f1d3c55f25ef6ebf475367b5d8/List.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/de7177e8a31c1e501222daf218f2e9532ff54cdb767595dc7e94cc73c8e95f1/Int32.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f3b9684f72bc2cc435eb694f7cc86eca8c240d2d1cefa1e8697a61f1f2f27f/SafeFileHandle.Windows.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f4708639776589f5ac2739f6fcbfc67343b1f9dac51cc1dbfdb003eef77cc1c/Monitor.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/dened/RiderProjects/BankServerApp/BankServerApp/BankClasses/Account.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/dened/RiderProjects/BankServerApp/BankServerApp/BankClasses/Account.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/dened/RiderProjects/BankServerApp/BankServerApp/BankClasses/Account.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/dened/RiderProjects/BankServerApp/BankServerApp/Controllers/BankServerController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/dened/RiderProjects/BankServerApp/BankServerApp/Controllers/BankServerController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/dened/RiderProjects/BankServerApp/BankServerApp/Controllers/BankServerController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/dened/RiderProjects/BankServerApp/BankServerApp/Controllers/BankServerController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/dened/RiderProjects/BankServerApp/BankServerApp/Controllers/BankServerController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/dened/RiderProjects/BankServerApp/BankServerApp/Controllers/BankServerController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/dened/RiderProjects/BankServerApp/BankServerApp/Controllers/BankServerController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/dened/RiderProjects/BankServerApp/BankServerApp/Controllers/BankServerController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BankServerApp/BankClasses/CentralAccountFunctions/Deposit.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -76,7 +77,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;RiderIisExpressOptionsPageId&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.web.browsers&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -161,7 +162,20 @@
       <workItem from="1667481589883" duration="4383000" />
       <workItem from="1667643940320" duration="1956000" />
       <workItem from="1668066725640" duration="1289000" />
-      <workItem from="1668096074105" duration="1176000" />
+      <workItem from="1668096074105" duration="1654000" />
+      <workItem from="1668164762247" duration="626000" />
+      <workItem from="1668498135942" duration="1274000" />
+      <workItem from="1668517536271" duration="2606000" />
+      <workItem from="1668758649894" duration="2761000" />
+      <workItem from="1669124673774" duration="8147000" />
+      <workItem from="1669900269491" duration="1797000" />
+      <workItem from="1670279015963" duration="1653000" />
+      <workItem from="1670281504152" duration="2214000" />
+      <workItem from="1670716407170" duration="752000" />
+      <workItem from="1670960744792" duration="12245000" />
+      <workItem from="1671029747366" duration="2549000" />
+      <workItem from="1671054069540" duration="702000" />
+      <workItem from="1671119563230" duration="14141000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1665673480747</created>
@@ -198,7 +212,21 @@
       <option name="project" value="LOCAL" />
       <updated>1666391882035</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Transactions for new payment system added">
+      <created>1668098692806</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668098692806</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Exchange tables file added">
+      <created>1668098758253</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1668098758253</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -578,6 +606,12 @@
     <MESSAGE value="Typo fixed in TransactionStatus.cs" />
     <MESSAGE value="Latest builds" />
     <MESSAGE value="Transactions bug fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Transactions bug fixed" />
+    <MESSAGE value="Transactions for new payment system added" />
+    <MESSAGE value="Exchange tables file added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exchange tables file added" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

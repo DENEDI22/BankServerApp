@@ -5,7 +5,7 @@ namespace BankServerApp;
 public struct Transaction
 {
     [JsonInclude] public long transactionID;
-    [JsonInclude] public int transactionAmount;
+    [JsonInclude] public decimal transactionAmount;
     [JsonInclude] public TransactionStatus transactionStatus;
     [JsonInclude] public string recieverAccountName, senderAccountName;
     [JsonInclude] public int recieverCard, senderCard;
@@ -25,7 +25,7 @@ public struct Transaction
         senderCard = SenderCard;
     }
     
-    public Transaction(int _transactionAmount, string _recieverName, string _senderName, int _recieverCard, int _senderCard)
+    public Transaction(decimal _transactionAmount, string _recieverName, string _senderName, int _recieverCard, int _senderCard)
     {
         Random random = new Random();
         transactionID = random.NextInt64(0, Int64.MaxValue);

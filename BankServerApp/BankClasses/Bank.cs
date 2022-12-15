@@ -1,17 +1,20 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 
 namespace BankServerApp;
 
 public class Bank
 {
     public List<Account> m_registeredAccounts { get; set; }
-
+    public List<Deposit> m_Deposits { get; set; }
     public List<Transaction> m_processingTransactionsSet { get; set; }
     public List<Card> m_Cards { get; set; }
 
     private const string ACCOUNTS_SAVEPATH = "/registeredAccounts.json";
     private const string CARDS_SAVEPATH = "/allCards.json";
     private const string TRANSACTIONSSAVEFOLDER = "/Transactions";
+
+
 
     public void AddTransactionToDatabase(Transaction _transaction, TransactionTypes _transactionType)
     {
@@ -61,6 +64,23 @@ public class Bank
         return m_Cards.Find(x => x.cardNumber == _cardNumber);
     }
 
+    public void GiveDepositPayments()
+    {
+        foreach (var deposit in m_Deposits)
+        {
+            if (deposit.lastPayoutDate.Day == DateTime.Now.Day)
+            {
+                PayDepositMoney(deposit);
+            }
+        }
+    }
+    
+    public List<Card> GetCardsOfUser(string _accountName)
+    {
+        Account account = m_registeredAccounts.Find(x => x.accountName == _accountName);
+        return m_Cards.FindAll(x => account.cards.Contains(x.cardNumber));
+    }
+
     public void UpdateCardsDatabase()
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
@@ -96,6 +116,33 @@ public class Bank
         }
     }
 
+    public void PayDepositMoney(Deposit _deposit)
+    {
+        m_registeredAccounts.Find(x => x.depositIDs.Contains(_deposit.depositID));
+    }
+    
+    public void OpenDeposit(string _openerAccount, int _startPayment, Currencies _currency, int _monthCount)
+    {
+        Account account = m_registeredAccounts.Find(x => x.accountName == _openerAccount);
+        Card card = GetCardsOfUser(account.accountName).Find(x => x.currency == _currency);
+
+        try
+        {
+            if (!card.isCurrentlyFreesed && card.cardBalance >= _startPayment)
+            {
+                account.ProcessTransaction(new Transaction(_startPayment, "Deposit", account.accountName,
+                    card.cardNumber, CentralAccount.cardNumbers[(int)card.currency]));
+                Deposit newDeposit = new Deposit(_startPayment, _monthCount);
+                m_Deposits.Add(newDeposit);
+                account.depositIDs.Add(newDeposit.depositID);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine();
+        }
+    }
+
     public Bank()
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
@@ -118,12 +165,11 @@ public class Bank
             using FileStream stream = new FileStream(path, FileMode.Create);
             stream.Dispose();
         }
-
         #endregion
 
         #region CardsLoad
 
-        path = Environment.GetFolderPath(folder) + CARDS_SAVEPATH;
+        path = Environment.GetFolderPath(folder) + CARDS_SAVEPATH;  
         if (File.Exists(path))
         {
             using (StreamReader reader = new StreamReader(path))
@@ -135,6 +181,7 @@ public class Bank
         else
         {
             m_Cards = new List<Card>();
+            GenerateCards();
             using FileStream stream = new FileStream(path, FileMode.Create);
             stream.Dispose();
         }

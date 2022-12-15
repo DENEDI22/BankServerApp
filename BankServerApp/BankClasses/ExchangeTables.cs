@@ -12,6 +12,16 @@ public class ExchangeTables
         return tmp * comparedToUAHExchangeRate[_returnCurrency];
     }
 
+    public decimal GetFromExchangeRateTable(int _innitialCurrency, int _returnCurrency, decimal amount)
+    {
+        return GetFromExchangeRateTable((Currencies)_innitialCurrency, (Currencies)_returnCurrency, amount);
+    }
+
+    public ExchangeTables()
+    {
+        LoadRates();
+    }
+
     private static Currencies? ParseCurrency(string _string)
     {
         switch (_string)

@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace BankServerApp;
 
+[Serializable]
 public struct Card
 {
     public int cardNumber { get; private set; }

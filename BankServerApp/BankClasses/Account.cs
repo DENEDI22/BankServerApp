@@ -6,25 +6,35 @@ namespace BankServerApp;
 public class Account
 {
     [JsonInclude] public string accountName { get; }
-    [JsonInclude] public int[] cards { get; private set; }
+    [JsonInclude] public List<int> cards { get; private set; }
     [JsonInclude] public string securityKey { get; private set; }
     [JsonInclude] public List<ulong> loggedInDeviceIDs { get; private set; }
+    [JsonInclude] public List<int> depositIDs { get; private set; }
 
     private List<Transaction> allTransactions = new List<Transaction>();
 
+    public int GetCardOfCurrency(Currencies _currencies) => cards.Find(x => x.ToString()[1] == (int)_currencies);
+
     [JsonConstructor]
-    public Account(string AccountName, string SecurityKey, List<ulong> LoggedInDeviceIDs, int[] Cards)
+    public Account(string AccountName, string SecurityKey, List<ulong> LoggedInDeviceIDs, int[] Cards, int[] DepositIDs)
     {
         accountName = AccountName;
         securityKey = SecurityKey;
         loggedInDeviceIDs = LoggedInDeviceIDs;
-        cards = Cards;
+        depositIDs = DepositIDs.ToList();
+        cards = Cards.ToList();
+    }
+
+    public void AddNewCard(Card _newCard)
+    {
+        cards.Add(_newCard.cardNumber);
     }
 
     public Account(string _accountName, string _securityKey)
     {
         accountName = _accountName;
         securityKey = _securityKey;
+        depositIDs = new List<int>();
         loggedInDeviceIDs = new List<ulong>();
     }
 
@@ -34,7 +44,15 @@ public class Account
         {
             Bank bank = new Bank();
             bool ifTransactionWasIncomming = _transaction.recieverAccountName == accountName;
-            bank.m_Cards.Find(x => ifTransactionWasIncomming ? x.cardNumber == _transaction.recieverCard : x.cardNumber == _transaction.senderCard).AddMoney((ifTransactionWasIncomming? _transaction.transactionAmount : -_transaction.transactionAmount), (ifTransactionWasIncomming ? bank.m_Cards.Find(x => x.cardNumber == _transaction.recieverCard).currency : bank.m_Cards.Find(x => x.cardNumber == _transaction.senderCard).currency)); //I know how to do it right. Just wanted to leave some mess right here.
+            bank.m_Cards
+                .Find(x => ifTransactionWasIncomming
+                    ? x.cardNumber == _transaction.recieverCard
+                    : x.cardNumber == _transaction.senderCard).AddMoney(
+                    (ifTransactionWasIncomming ? _transaction.transactionAmount : -_transaction.transactionAmount),
+                    (ifTransactionWasIncomming
+                        ? bank.m_Cards.Find(x => x.cardNumber == _transaction.recieverCard).currency
+                        : bank.m_Cards.Find(x => x.cardNumber == _transaction.senderCard)
+                            .currency)); //I know how to do it right. Just wanted to leave some mess right here.
         }
     }
 
@@ -103,6 +121,7 @@ public class Account
         {
             return ProcessTransaction(_newTransaction);
         }
+
         return 3;
     }
 }

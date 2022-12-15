@@ -16,21 +16,53 @@ namespace BankServerApp.Controllers
             bank = new Bank();
         }
 
+        [HttpPost(
+            "deposits/createNew/{_openerAccount}&{_startPayment}&{_currency}&{_monthCount}")]
+        public void AddNewDeposit(string _openerAccount, int _startPayment, int _currency, int _monthCount) =>
+            bank.OpenDeposit(_openerAccount, _startPayment, (Currencies)_currency, _monthCount);
+
+        public void AddNewDeposit()
+        {
+            
+        }
+        
+        [HttpGet("deposits/getDepositsof{_accountName}")]
+        public Deposit[] GetDepositsOfUser(string _accountName)
+        {
+            return bank.m_Deposits.FindAll(x =>
+                    bank.m_registeredAccounts.Find(x => x.accountName == _accountName).depositIDs.Contains(x.depositID))
+                .ToArray();
+        }
+
         [HttpGet("transactions/{_accountName}")]
         public Transaction[]? GetTransactions(string _accountName)
         {
             return bank.GetUsersTransactions(_accountName);
         }
-        [HttpGet("newtransaction/{_transactionAmount}&{_receiverName}&{_senderName}&{_senderCardNumber}&{_senderCardCVV}&{_receiverCardNumber}")]
+
+        [HttpGet(
+            "newtransaction/{_transactionAmount}&{_receiverName}&{_senderName}&{_senderCardNumber}&{_senderCardCVV}&{_receiverCardNumber}")]
         public int AddTransaction(int _transactionAmount, string _receiverName, string _senderName,
-            int _senderCardNumber,int _senderCardCVV, int _receiverCardNumber)
+            int _senderCardNumber, int _senderCardCVV, int _receiverCardNumber)
         {
             var newTransaction = new Transaction(_transactionAmount, _receiverName, _senderName, _receiverCardNumber,
                 _senderCardNumber);
+            decimal additionalPayment = 0;
+            if (newTransaction.recieverCard.ToString()[1] == newTransaction.senderCard.ToString()[1])
+            {
+                ExchangeTables tables = new ExchangeTables();
+                additionalPayment =
+                    tables.GetFromExchangeRateTable(Int32.Parse(newTransaction.recieverCard.ToString()[1].ToString()),
+                        Int32.Parse(newTransaction.senderCard.ToString()[1].ToString()),
+                        newTransaction.transactionAmount) - newTransaction.transactionAmount;
+            }
+
             var senderAccount = bank.m_registeredAccounts.Find(x => x.accountName == _senderName);
+            newTransaction.transactionAmount += additionalPayment;
             switch (senderAccount.ProcessTransaction(newTransaction))
             {
                 case 0:
+                    newTransaction.transactionAmount -= additionalPayment;
                     int transactionResult = bank.m_registeredAccounts.Find(x => x.accountName == _receiverName)
                         .ProcessTransaction(newTransaction);
                     if (transactionResult == 0)
