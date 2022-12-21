@@ -21,9 +21,9 @@ public static class DepositTables
         new CreditDepositDraft(){currency = Currencies.UAH, interestRate = 20, monthCount = 6, startsumm = 5000},
         new CreditDepositDraft(){currency = Currencies.UAH, interestRate = 15, monthCount = 18, startsumm = 10000},
         new CreditDepositDraft(){currency = Currencies.UAH, interestRate = 15, monthCount = 12, startsumm = 15000},
-        new CreditDepositDraft(){currency = Currencies.EUR, interestRate = new decimal(10), monthCount = 6, startsumm = 1000},
-        new CreditDepositDraft(){currency = Currencies.EUR, interestRate = new decimal(8), monthCount = 6, startsumm = 3000},
-        new CreditDepositDraft(){currency = Currencies.EUR, interestRate = new decimal(5), monthCount = 24, startsumm = 10000}
+        new CreditDepositDraft(){currency = Currencies.EUR, interestRate = new decimal(20), monthCount = 6, startsumm = 1000},
+        new CreditDepositDraft(){currency = Currencies.EUR, interestRate = new decimal(15), monthCount = 6, startsumm = 3000},
+        new CreditDepositDraft(){currency = Currencies.EUR, interestRate = new decimal(15), monthCount = 24, startsumm = 10000}
     };
 
     public static string GetJSONDrafts() => JsonSerializer.Serialize(depositDrafts);

@@ -2,40 +2,46 @@
 
 namespace BankServerApp;
 
-[Serializable]
 public class Account
 {
-    [JsonInclude] public string accountName { get; }
-    [JsonInclude] public List<int> cards { get; private set; }
-    [JsonInclude] public string securityKey { get; private set; }
-    [JsonInclude] public List<ulong> loggedInDeviceIDs { get; private set; }
-    [JsonInclude] public List<int> depositIDs { get; private set; }
+    [JsonInclude] [JsonPropertyName("AccountName")] public string AccountName { get; set; }
+    [JsonInclude] [JsonPropertyName("Cards")] public List<int> Cards { get; set; }
+    [JsonInclude] [JsonPropertyName("SecurityKey")] public string SecurityKey { get;  set; }
+    [JsonInclude] [JsonPropertyName("LoggedInDeviceIDs")] public List<ulong> LoggedInDeviceIDs { get;  set; }
+    [JsonInclude] [JsonPropertyName("DepositIDs")] public List<int> DepositIDs { get; set; }
 
-    private List<Transaction> allTransactions = new List<Transaction>();
+    [JsonInclude] [JsonPropertyName("CreditIDs")] public List<int> CreditIDs { get; set; }
 
-    public int GetCardOfCurrency(Currencies _currencies) => cards.Find(x => x.ToString()[1] == (int)_currencies);
+    private List<Transaction>? allTransactions;
 
+    public int GetCardOfCurrency(Currencies _currencies) => Cards.Find(x => x.ToString()[1] == (int)_currencies);
+    
     [JsonConstructor]
-    public Account(string AccountName, string SecurityKey, List<ulong> LoggedInDeviceIDs, int[] Cards, int[] DepositIDs)
+    public Account(string AccountName, string SecurityKey, List<ulong> LoggedInDeviceIDs, int[] Cards, int[] DepositIDs,
+        int[] CreditIDs)
     {
-        accountName = AccountName;
-        securityKey = SecurityKey;
-        loggedInDeviceIDs = LoggedInDeviceIDs;
-        depositIDs = DepositIDs.ToList();
-        cards = Cards.ToList();
+        this.AccountName = AccountName;
+        this.SecurityKey = SecurityKey;
+        this.LoggedInDeviceIDs = LoggedInDeviceIDs;
+        this.CreditIDs = CreditIDs.ToList();
+        this.DepositIDs = DepositIDs.ToList();
+        this.Cards = Cards.ToList();
     }
-
+    
     public void AddNewCard(Card _newCard)
     {
-        cards.Add(_newCard.cardNumber);
+        Cards.Add(_newCard.cardNumber);
     }
 
     public Account(string _accountName, string _securityKey)
     {
-        accountName = _accountName;
-        securityKey = _securityKey;
-        depositIDs = new List<int>();
-        loggedInDeviceIDs = new List<ulong>();
+        AccountName = _accountName;
+        SecurityKey = _securityKey;
+        DepositIDs = new List<int>();
+        Cards = new List<int>();
+        CreditIDs = new List<int>();
+        LoggedInDeviceIDs = new List<ulong>();
+        allTransactions = new List<Transaction>();
     }
 
     public void RollbackTransaction(Transaction _transaction)
@@ -43,7 +49,7 @@ public class Account
         if (allTransactions.Remove(_transaction))
         {
             Bank bank = new Bank();
-            bool ifTransactionWasIncomming = _transaction.recieverAccountName == accountName;
+            bool ifTransactionWasIncomming = _transaction.recieverAccountName == AccountName;
             bank.m_Cards
                 .Find(x => ifTransactionWasIncomming
                     ? x.cardNumber == _transaction.recieverCard
@@ -58,25 +64,25 @@ public class Account
 
     public bool TryLogIn(string _securityKey, ulong _deviceID)
     {
-        if (loggedInDeviceIDs.Contains(_deviceID)) return true;
-        if (_securityKey == securityKey)
+        if (LoggedInDeviceIDs.Contains(_deviceID)) return true;
+        if (_securityKey == SecurityKey)
         {
-            loggedInDeviceIDs.Add(_deviceID);
+            LoggedInDeviceIDs.Add(_deviceID);
             return true;
         }
 
         return false;
     }
 
-    public Transaction[] Transactions(ulong _deviceID)
-    {
-        if (loggedInDeviceIDs.Contains(_deviceID))
-        {
-            return allTransactions.ToArray();
-        }
-
-        return null;
-    }
+    // public Transaction[] Transactions(ulong _deviceID)
+    // {
+    //     if (loggedInDeviceIDs.Contains(_deviceID))
+    //     {
+    //         return allTransactions.ToArray();
+    //     }
+    //
+    //     return null;
+    // }
 
     /// <summary>
     /// returns 0 if transaction is successful. 
@@ -88,21 +94,25 @@ public class Account
     public int ProcessTransaction(Transaction _newTransaction)
     {
         Bank bank = new();
-        if (_newTransaction.senderAccountName == accountName && cards.Contains(_newTransaction.senderCard))
+        if (_newTransaction.senderAccountName == AccountName && Cards.Contains(_newTransaction.senderCard))
         {
             Card senderCard = bank.GetCardOfNumber(_newTransaction.senderCard);
             if (senderCard.cardBalance - _newTransaction.transactionAmount > 0 && !senderCard.isCurrentlyFreesed)
+            {
                 senderCard.AddMoney(-_newTransaction.transactionAmount, senderCard.currency);
+                bank.UpdateCardsDatabase();
+            }
             else return 1;
         }
-        else if (_newTransaction.recieverAccountName == accountName && cards.Contains(_newTransaction.recieverCard))
+        else if (_newTransaction.recieverAccountName == AccountName && Cards.Contains(_newTransaction.recieverCard))
         {
             Card receiverCard = bank.GetCardOfNumber(_newTransaction.recieverCard);
             receiverCard.AddMoney(_newTransaction.transactionAmount,
                 bank.GetCardOfNumber(_newTransaction.senderCard).currency);
+            bank.UpdateCardsDatabase();
         }
         else return 2;
-
+        
         return 0;
     }
 
@@ -121,7 +131,6 @@ public class Account
         {
             return ProcessTransaction(_newTransaction);
         }
-
         return 3;
     }
 }

@@ -24,16 +24,16 @@ public class CentralAccount
         new Card(24321, 0, (int)Currencies.PLN, new DateOnly(9998, 12, 1).ToString(), true, 100000000, false),
     };
 
-    private const string CENTRAL_ACCOUNT_DATA_SAVEPATH = "/centralAccount.json";
+    private const string CENTRAL_ACCOUNT_DATA_SAVEPATH = @"\centralAccount.json";
 
 
-    private Transaction RequestDepositPayout(Account _account, Deposit _deposit)
+    private Transaction RequestDepositPayout(Account _account, CreditDepositData _creditDepositData)
     {
-        int paymentInterval = (DateTime.Today - _deposit.lastPayoutDate).Days;
-        decimal depositPaymentAmount = paymentInterval * _deposit.interestRate / paymentInterval;
-        int recieverCard = _account.cards.Find(x => x.ToString().ToCharArray()[1] == (int)_deposit.currency);
-        return new Transaction(depositPaymentAmount, _account.accountName, "Deposit Payout", recieverCard,
-            balances[(int)_deposit.currency].cardNumber);
+        int paymentInterval = (DateTime.Today - _creditDepositData.lastPayoutDate).Days;
+        decimal depositPaymentAmount = paymentInterval * _creditDepositData.interestRate / paymentInterval;
+        int recieverCard = _account.Cards.Find(x => x.ToString().ToCharArray()[1] == (int)_creditDepositData.currency);
+        return new Transaction(depositPaymentAmount, _account.AccountName, "Deposit Payout", recieverCard,
+            balances[(int)_creditDepositData.currency].cardNumber);
     }
 
     /// <summary>

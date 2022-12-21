@@ -17,21 +17,38 @@ namespace BankServerApp.Controllers
         }
 
         [HttpPost(
-            "deposits/createNew/{_openerAccount}&{_startPayment}&{_currency}&{_monthCount}")]
-        public void AddNewDeposit(string _openerAccount, int _startPayment, int _currency, int _monthCount) =>
-            bank.OpenDeposit(_openerAccount, _startPayment, (Currencies)_currency, _monthCount);
+            "deposits/createNew/{_openerAccount}&{_startPayment}&{_currency}&{_monthCount}&{_interestRate}")]
+        public void AddNewDeposit(string _openerAccount, int _startPayment, int _currency, int _monthCount,
+            decimal _interestRate) =>
+            bank.OpenDeposit(_openerAccount, _startPayment, (Currencies)_currency, _monthCount, _interestRate);
 
-        public void AddNewDeposit()
-        {
-            
-        }
-        
         [HttpGet("deposits/getDepositsof{_accountName}")]
-        public Deposit[] GetDepositsOfUser(string _accountName)
+        public CreditDepositData[] GetDepositsOfUser(string _accountName)
         {
             return bank.m_Deposits.FindAll(x =>
-                    bank.m_registeredAccounts.Find(x => x.accountName == _accountName).depositIDs.Contains(x.depositID))
+                    bank.m_registeredAccounts.Find(x => x.AccountName == _accountName).DepositIDs.Contains(x.DepositId))
                 .ToArray();
+        }
+
+        [HttpGet("credits/getCreditsOf{_accountName}")]
+        public CreditDepositData[] GetCreditsOfUser(string _accountName)
+        {
+            return bank.m_Credits.FindAll(x =>
+                    bank.m_registeredAccounts.Find(x => x.AccountName == _accountName).DepositIDs.Contains(x.DepositId))
+                .ToArray();
+        }
+
+        [HttpPost("credits/createNew/{_openerAccount}&{_startPayment}&{_currency}&{_monthCount}&{_interestRate}")]
+        public void TakeCredit(string _openerAccount, int _startPayment, int _currency, int _monthCount,
+            decimal _interestRate)
+        {
+            bank.OpenCredit(new CreditDepositDraft
+            {
+                monthCount = _monthCount,
+                startsumm = _startPayment,
+                interestRate = _interestRate,
+                currency = (Currencies)_currency
+            }, _openerAccount);
         }
 
         [HttpGet("transactions/{_accountName}")]
@@ -57,13 +74,13 @@ namespace BankServerApp.Controllers
                         newTransaction.transactionAmount) - newTransaction.transactionAmount;
             }
 
-            var senderAccount = bank.m_registeredAccounts.Find(x => x.accountName == _senderName);
+            var senderAccount = bank.m_registeredAccounts.Find(x => x.AccountName == _senderName);
             newTransaction.transactionAmount += additionalPayment;
             switch (senderAccount.ProcessTransaction(newTransaction))
             {
                 case 0:
                     newTransaction.transactionAmount -= additionalPayment;
-                    int transactionResult = bank.m_registeredAccounts.Find(x => x.accountName == _receiverName)
+                    int transactionResult = bank.m_registeredAccounts.Find(x => x.AccountName == _receiverName)
                         .ProcessTransaction(newTransaction);
                     if (transactionResult == 0)
                     {
@@ -108,6 +125,7 @@ namespace BankServerApp.Controllers
             bank.m_registeredAccounts.Add(account);
             if (bank.m_registeredAccounts[^1].TryLogIn(_securityCode, _deviceID))
             {
+                bank.AssignCard(_accountName, Currencies.UAH);
                 bank.UpdateUserDatabase();
                 return account;
             }
@@ -118,7 +136,7 @@ namespace BankServerApp.Controllers
         [HttpGet("login/{_accountName}&{_securityCode}&{_deviceID}")]
         public Account LogIn(string _accountName, string _securityCode, ulong _deviceID)
         {
-            var account = bank.m_registeredAccounts.Find(_account => _account.accountName == _accountName);
+            var account = bank.m_registeredAccounts.Find(_account => _account.AccountName == _accountName);
             if (account != null)
             {
                 if (account.TryLogIn(_securityCode, _deviceID))
@@ -129,6 +147,11 @@ namespace BankServerApp.Controllers
             }
 
             return null;
+        }
+        [HttpPost("cards/assign/{_accountName}&{_currency}")]
+        public void AssignNewCard(string _accountName, int _currency)
+        {
+            bank.AssignCard(_accountName, (Currencies)_currency);
         }
     }
 }

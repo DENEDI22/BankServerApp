@@ -5,15 +5,14 @@ namespace BankServerApp;
 
 [Serializable]
 public struct Card
-{
-    public int cardNumber { get; private set; }
-    public int additionalSecurityCode { get; private set; }
-    public Currencies currency { get; private set; }
-    public DateTime expireDate { get; private set; }
-    public bool isCurrentlyActive { get; private set; }
-    public bool isCurrentlyFreesed { get; private set; } = false;
-    public decimal cardBalance { get; private set; }
-
+{ 
+    [JsonInclude] public int cardNumber { get; set; }
+    [JsonInclude] public int additionalSecurityCode { get; set; }
+    [JsonInclude] public Currencies currency { get; set; }
+    [JsonInclude] public DateTime expireDate { get; set; }
+    [JsonInclude] public bool isCurrentlyActive { get; set; }
+    [JsonInclude] public bool isCurrentlyFreesed { get; set; }
+    [JsonInclude] public decimal cardBalance { get; set; }
     /// <summary>
     /// Use this to create completely new card. Creates inactive card with specific number and generated CVV code,
     /// </summary>
@@ -28,12 +27,14 @@ public struct Card
         Random random = new Random();
         additionalSecurityCode = random.Next(1000);
         cardBalance = 0;
+        isCurrentlyFreesed = false;
     }
 
     public void ActivateCard()
     {
         Random random = new Random();
         additionalSecurityCode = random.Next(1000);
+        expireDate = DateTime.Now + new TimeSpan(365 * 4, 0, 0, 0);
         isCurrentlyActive = true;
     }
     
