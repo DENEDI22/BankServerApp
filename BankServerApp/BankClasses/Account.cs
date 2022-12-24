@@ -8,24 +8,24 @@ public class Account
     [JsonInclude] [JsonPropertyName("Cards")] public List<int> Cards { get; set; }
     [JsonInclude] [JsonPropertyName("SecurityKey")] public string SecurityKey { get;  set; }
     [JsonInclude] [JsonPropertyName("LoggedInDeviceIDs")] public List<ulong> LoggedInDeviceIDs { get;  set; }
-    [JsonInclude] [JsonPropertyName("DepositIDs")] public List<int> DepositIDs { get; set; }
+    [JsonInclude] [JsonPropertyName("DepositIDs")] public List<int>? DepositIDs { get; set; }
 
-    [JsonInclude] [JsonPropertyName("CreditIDs")] public List<int> CreditIDs { get; set; }
+    [JsonInclude] [JsonPropertyName("CreditIDs")] public List<int>? CreditIDs { get; set; }
 
     private List<Transaction>? allTransactions;
 
     public int GetCardOfCurrency(Currencies _currencies) => Cards.Find(x => x.ToString()[1] == (int)_currencies);
     
     [JsonConstructor]
-    public Account(string AccountName, string SecurityKey, List<ulong> LoggedInDeviceIDs, int[] Cards, int[] DepositIDs,
-        int[] CreditIDs)
+    public Account(string AccountName, string SecurityKey, List<ulong> LoggedInDeviceIDs, List<int> Cards, List<int> DepositIDs,
+        List<int> CreditIDs)
     {
         this.AccountName = AccountName;
         this.SecurityKey = SecurityKey;
         this.LoggedInDeviceIDs = LoggedInDeviceIDs;
-        this.CreditIDs = CreditIDs.ToList();
-        this.DepositIDs = DepositIDs.ToList();
-        this.Cards = Cards.ToList();
+        this.CreditIDs = CreditIDs;
+        this.DepositIDs = DepositIDs;
+        this.Cards = Cards;
     }
     
     public void AddNewCard(Card _newCard)

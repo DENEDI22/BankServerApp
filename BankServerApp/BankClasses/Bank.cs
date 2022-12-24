@@ -19,11 +19,15 @@ public class Bank
 
     public void AssignCard(string _account, Currencies _currency)
     {
-        int cardIndex = m_Cards.FindIndex(x => !x.isCurrentlyActive && x.currency == _currency);
-        m_registeredAccounts.Find(x => x.AccountName == _account).AddNewCard(m_Cards[cardIndex]);
-        m_Cards[cardIndex].ActivateCard();
+        var cardIndex = m_Cards.Find(x => !x.isCurrentlyActive == true && x.currency == _currency);
+        m_Cards.Remove(cardIndex);
+        m_registeredAccounts.Find(x => x.AccountName == _account).AddNewCard(cardIndex);
+        cardIndex.ActivateCard();
+        m_Cards.Add(cardIndex);
+        UpdateUserDatabase();
+        UpdateDatabase(CARDS_SAVEPATH, m_Cards);
     }
-    
+
     public void AddTransactionToDatabase(Transaction _transaction, TransactionTypes _transactionType)
     {
         string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
@@ -89,6 +93,7 @@ public class Bank
                 AddTransactionToDatabase(payoutTransaction, TransactionTypes.Income);
             }
         }
+
         UpdateUserDatabase();
     }
 
@@ -97,10 +102,14 @@ public class Bank
         Account account = m_registeredAccounts.Find(x => x.AccountName == _accountName);
         CreditDepositData newCredit = new CreditDepositData(_draft);
         account.CreditIDs.Add(newCredit.DepositId);
+        account.ProcessTransaction(new Transaction(_draft.startsumm, account.AccountName, "Loan",
+            account.GetCardOfCurrency(_draft.currency), CentralAccount.cardNumbers[(int)_draft.currency]));
+        CentralAccount.ProcessTranasactionStatic(new Transaction(_draft.startsumm, account.AccountName, "Loan",
+            account.GetCardOfCurrency(_draft.currency), CentralAccount.cardNumbers[(int)_draft.currency]));
         UpdateDatabase(ACCOUNTS_SAVEPATH, m_registeredAccounts);
         UpdateDatabase(CREDITS_SAVEPATH, m_Credits);
     }
-    
+
     public void TakeCreditPayments()
     {
         foreach (var credit in m_Credits)
@@ -133,6 +142,7 @@ public class Bank
                 }
             }
         }
+
         UpdateDatabase(CREDITS_SAVEPATH, m_Credits);
     }
 

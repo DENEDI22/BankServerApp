@@ -47,13 +47,13 @@ public struct Card
     /// <param name="ExpireDate"></param>
     /// <param name="IsCurrentlyActive"></param>
     [JsonConstructor]
-    public Card(int CardNumber, int AdditionalSecurityCode, int Currency, string ExpireDate, bool IsCurrentlyActive,
+    public Card(int CardNumber, int AdditionalSecurityCode, Currencies Currency, DateTime ExpireDate, bool IsCurrentlyActive,
         decimal CardBalance, bool IsCurrentlyFreesed)
     {
         cardNumber = CardNumber;
         additionalSecurityCode = AdditionalSecurityCode;
-        currency = (Currencies)Currency;
-        expireDate = DateTime.Parse(ExpireDate);
+        currency = Currency;
+        expireDate = ExpireDate;
         isCurrentlyActive = IsCurrentlyActive;
         cardBalance = CardBalance;
         isCurrentlyFreesed = IsCurrentlyFreesed;

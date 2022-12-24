@@ -17,11 +17,11 @@ public class CentralAccount
 
     public readonly Card[] balances = new[]
     {
-        new Card(20321, 0, (int)Currencies.USD, new DateOnly(9998, 12, 1).ToString(), true, 100000000, false),
-        new Card(21321, 0, (int)Currencies.EUR, new DateOnly(9998, 12, 1).ToString(), true, 100000000, false),
-        new Card(22321, 0, (int)Currencies.UAH, new DateOnly(9998, 12, 1).ToString(), true, 100000000, false),
-        new Card(23321, 0, (int)Currencies.GBP, new DateOnly(9998, 12, 1).ToString(), true, 100000000, false),
-        new Card(24321, 0, (int)Currencies.PLN, new DateOnly(9998, 12, 1).ToString(), true, 100000000, false),
+        new Card(20321, 0, Currencies.USD, new DateTime(9998, 12, 1), true, 100000000, false),
+        new Card(21321, 0, Currencies.EUR, new DateTime(9998, 12, 1), true, 100000000, false),
+        new Card(22321, 0, Currencies.UAH, new DateTime(9998, 12, 1), true, 100000000, false),
+        new Card(23321, 0, Currencies.GBP, new DateTime(9998, 12, 1), true, 100000000, false),
+        new Card(24321, 0, Currencies.PLN, new DateTime(9998, 12, 1), true, 100000000, false),
     };
 
     private const string CENTRAL_ACCOUNT_DATA_SAVEPATH = @"\centralAccount.json";
@@ -90,11 +90,10 @@ public class CentralAccount
         {
             balances = new[]
             {
-                new Card(20321, 0, (int)Currencies.USD, new DateOnly(9998, 12, 1).ToString(), true, 100000000, false),
-                new Card(21321, 0, (int)Currencies.EUR, new DateOnly(9998, 12, 1).ToString(), true, 100000000, false),
-                new Card(22321, 0, (int)Currencies.UAH, new DateOnly(9998, 12, 1).ToString(), true, 100000000, false),
-                new Card(23321, 0, (int)Currencies.GBP, new DateOnly(9998, 12, 1).ToString(), true, 100000000, false),
-                new Card(24321, 0, (int)Currencies.PLN, new DateOnly(9998, 12, 1).ToString(), true, 100000000, false),
+                new Card(20321, 0,Currencies.USD, new DateTime(9998, 12, 1), true, 100000000, false),
+                new Card(22321, 0, Currencies.UAH, new DateTime(9998, 12, 1), true, 100000000, false),
+                new Card(23321, 0, Currencies.GBP, new DateTime(9998, 12, 1), true, 100000000, false),
+                new Card(24321, 0, Currencies.PLN, new DateTime(9998, 12, 1), true, 100000000, false),
             };
             using FileStream stream = new FileStream(path, FileMode.Create);
             stream.Dispose();
